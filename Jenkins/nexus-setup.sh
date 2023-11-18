@@ -5,13 +5,13 @@ mkdir -p /tmp/nexus/
 cd /tmp/nexus/
 NEXUSURL="https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
 wget $NEXUSURL -O nexus.tar.gz
-sleep 10
+sleep 30
 EXTOUT=`tar xzvf nexus.tar.gz`
 NEXUSDIR=`echo $EXTOUT | cut -d '/' -f1`
-sleep 5
+sleep 20
 rm -rf /tmp/nexus/nexus.tar.gz
 cp -r /tmp/nexus/* /opt/nexus/
-sleep 5
+sleep 20
 useradd nexus
 chown -R nexus.nexus /opt/nexus 
 cat <<EOT>> /etc/systemd/system/nexus.service
@@ -36,3 +36,5 @@ echo 'run_as_user="nexus"' > /opt/nexus/$NEXUSDIR/bin/nexus.rc
 systemctl daemon-reload
 systemctl start nexus
 systemctl enable nexus
+
+### Centos7
